@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Login-Virtual Class</title>
+  <title>Create Room</title>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
   <link rel="stylesheet" href="css/styles.css">
@@ -13,31 +13,29 @@
 
 
 <div class="container mt-5">
-  <h1>Login</h1>
+  <h1>Create or Join Class</h1>
 
   <div class="row">
     <div class="col-sm-8">
       <div class="card">
         <div class="card-body">
 
+          <a class="btn btn-light btn-lg" href="/<%=roomId%>" role="button">Create room</a>
+          <form action="/createroom" method="POST">
+            <div class="form-group">
+              <label for="text">Enter room id</label>
+              <input type="text" class="form-control" name="roomid">
+            </div>
 
-          <form action="/login" method="POST">
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" class="form-control" name="username">
-            </div>
-            <div class="form-group">
-              <label for="password">Password</label>
-              <input type="password" class="form-control" name="password">
-            </div>
-            <button type="submit" class="btn btn-dark">Login</button>
+            <button type="submit" class="btn btn-dark">Join</button>
           </form>
+
 
         </div>
       </div>
     </div>
 
-  
+
 
   </div>
 </div>

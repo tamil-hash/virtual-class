@@ -12,7 +12,8 @@ const { ExpressPeerServer } = require('peer');
 const peerServer = ExpressPeerServer(server, {
   debug: true
 });
-const { v4: uuidV4 } = require('uuid')
+const { v4: uuidV4 } = require('uuid');
+// var roomid = uuidV4();
 
 app.use('/peerjs', peerServer);
 
@@ -27,9 +28,9 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
+//mongodb+srv://tamil:tAmIl0oo0@webdevelopment.dzan1.mongodb.net/vclassDB?retryWrites=true&w=majority
 
-
-mongoose.connect("mongodb+srv://tamil:tAmIl0oo0@webdevelopment.dzan1.mongodb.net/vclassDB?retryWrites=true&w=majority",{useNewUrlParser:true,useUnifiedTopology:true});
+mongoose.connect("mongodb://localhost:27017/vclassDB",{useNewUrlParser:true,useUnifiedTopology:true});
 mongoose.set("useCreateIndex",true);
 
 const usersSchema = new mongoose.Schema({
@@ -59,17 +60,24 @@ app.get('/login',function(req,res){
 app.get('/register',function(req,res){
   res.render('register');
 });
-
-app.get('/:id', (req, res) => {
+app.get('/createroom',function(req,res){
   if(req.isAuthenticated()){
-    console.log(req.params.id);
-    res.render('room', { roomId: req.params.id });
+  res.render('createroom',{roomId:uuidV4()});
   }
   else{
     res.redirect('/login');
   }
-
 });
+app.get('/:roomid', (req, res) => {
+    res.render('room', { roomId: req.params.roomid});
+});
+
+app.post('/createroom',function(req,res){
+  const roomid = req.body.roomid;
+  res.redirect('/'+roomid);
+})
+
+
 app.post("/logout",function(req,res){
   req.logout();
   res.redirect("/");
@@ -80,7 +88,7 @@ app.post('/register',function(req,res){
   User.register({username:req.body.username},req.body.password,function(err,user){
     if(!err){
       passport.authenticate("local")(req,res,function(){
-        res.redirect(`/${uuidV4()}`);
+        res.redirect(`/createroom`);
       });
 
     }
@@ -97,7 +105,7 @@ app.post('/login',function(req,res){
   req.login(user, function(err){
     if(!err){
       passport.authenticate("local")(req,res,function(){
-        res.redirect(`/${uuidV4()}`);
+        res.redirect(`/createroom`);
       });
     }
     else{
