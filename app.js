@@ -34,7 +34,6 @@ mongoose.set("useCreateIndex",true);
 
 const usersSchema = new mongoose.Schema({
   email: String,
-  name:
   password:String
 });
 
