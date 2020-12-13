@@ -13,7 +13,7 @@ const peerServer = ExpressPeerServer(server, {
   debug: true
 });
 const { v4: uuidV4 } = require('uuid');
-// var roomid = uuidV4();
+
 
 app.use('/peerjs', peerServer);
 
@@ -28,9 +28,9 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
-//mongodb+srv://tamil:tAmIl0oo0@webdevelopment.dzan1.mongodb.net/vclassDB?retryWrites=true&w=majority
 
-mongoose.connect("mongodb://localhost:27017/vclassDB",{useNewUrlParser:true,useUnifiedTopology:true});
+
+mongoose.connect("mongodb+srv://tamil:tAmIl0oo0@webdevelopment.dzan1.mongodb.net/vclassDB?retryWrites=true&w=majority",{useNewUrlParser:true,useUnifiedTopology:true});
 mongoose.set("useCreateIndex",true);
 
 const usersSchema = new mongoose.Schema({
