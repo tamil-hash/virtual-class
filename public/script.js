@@ -90,7 +90,6 @@ const muteUnmute = () => {
 }
 
 const playStop = () => {
-  console.log('object')
   let enabled = myVideoStream.getVideoTracks()[0].enabled;
   if (enabled) {
     myVideoStream.getVideoTracks()[0].enabled = false;
@@ -131,4 +130,16 @@ const setPlayVideo = () => {
     <span>Play Video</span>
   `
   document.querySelector('.main__video_button').innerHTML = html;
+}
+
+function copyFunction() {
+    var copiedtext = document.getElementById("copy").innerText;
+    var elem = document.createElement("textarea");
+    document.body.appendChild(elem);
+    elem.value=copiedtext;
+    elem.select();
+    elem.setSelectionRange(0,99999);
+    document.execCommand("copy");
+    document.body.removeChild(elem);
+
 }
