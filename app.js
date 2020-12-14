@@ -7,7 +7,7 @@ const session = require('express-session');
 const passport = require('passport');
 const passportLocalMongoose = require('passport-local-mongoose');
 const server = require('http').Server(app);
-const io = require('socket.io')();
+const io = require('socket.io')(server);
 const { ExpressPeerServer } = require('peer');
 const peerServer = ExpressPeerServer(server, {
   debug: true
